@@ -1,26 +1,44 @@
 import React from 'react'
-import Note from '../Note/Note'
-import './NotePageMain.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CircleButton from '../CircleButton/CircleButton'
+import ApiContext from '../ApiContext'
+import { findNote, findFolder } from '../notes-helpers'
+import './NotePageNav.css'
 
-export default function NotePageMain(props) {
-  return (
-    <section className='NotePageMain'>
-      <Note
-        id={props.note.id}
-        name={props.note.name}
-        modified={props.note.modified}
-      />
-      <div className='NotePageMain__content'>
-        {props.note.content.split(/\n \r|\n/).map((para, i) =>
-          <p key={i}>{para}</p>
+export default class NotePageNav extends React.Component {
+  static defaultProps = {
+    history: {
+      goBack: () => { }
+    },
+    match: {
+      params: {}
+    }
+  }
+  static contextType = ApiContext;
+
+  render() {
+    const { notes, folders, } = this.context
+    const { noteId } = this.props.match.params
+    const note = findNote(notes, noteId) || {}
+    const folder = findFolder(folders, note.folderId)
+    return (
+      <div className='NotePageNav'>
+        <CircleButton
+          tag='button'
+          role='link'
+          onClick={() => this.props.history.goBack()}
+          className='NotePageNav__back-button'
+        >
+          <FontAwesomeIcon icon='chevron-left' />
+          <br />
+          Back
+        </CircleButton>
+        {folder && (
+          <h3 className='NotePageNav__folder-name'>
+            {folder.name}
+          </h3>
         )}
       </div>
-    </section>
-  )
-}
-
-NotePageMain.defaultProps = {
-  note: {
-    content: '',
+    )
   }
 }
