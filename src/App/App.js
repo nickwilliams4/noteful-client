@@ -8,6 +8,7 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import './App.css';
+import AddFolder from '../AddFolder';
 
 class App extends Component {
     state = {
@@ -72,9 +73,15 @@ class App extends Component {
                     />
                 ))}
                 <Route path="/note/:noteId" component={NotePageMain} />
+                <Route path="/add-folder" component={AddFolder} />
             </>
         );
     }
+    addFolder = folder => {
+        this.setState({
+          folders: [ ...this.state.folders, folder ],
+        })
+      }
 
     render() {
         const value = {
