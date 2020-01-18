@@ -21,7 +21,7 @@ class AddFolder extends Component {
       title: title.value
     }
     this.setState({ error: null })
-    fetch(config.API_ENDPOINT, {
+    fetch(`${config.API_ENDPOINT}/folders`, {
       method: 'POST',
       body: JSON.stringify(folder),
       
