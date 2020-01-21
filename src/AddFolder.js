@@ -35,6 +35,7 @@ class AddFolder extends Component {
         return res.json()
       })
       .then(data => {
+        title.value = ''
         this.context.addFolder(data)
         this.props.history.push('/')
       })
@@ -46,6 +47,7 @@ class AddFolder extends Component {
     this.props.history.push('/')
   };
   render() {
+    const { error } = this.state
     return (
       <section className='AddFolder'>
         <h2>Create a folder</h2>
@@ -54,7 +56,7 @@ class AddFolder extends Component {
           onSubmit={this.handleSubmit}
         >
           <div className='AddFolder__error' role='alert'>
-            {/* {error && <p>{error.message}</p>} */}
+            {error && <p>{error.message}</p>}
           </div>
           <div>
             <label htmlFor='title'>

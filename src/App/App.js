@@ -13,7 +13,8 @@ import AddFolder from '../AddFolder';
 class App extends Component {
     state = {
         notes: [],
-        folders: []
+        folders: [],
+        error: null
     };
 
     componentDidMount() {
@@ -77,6 +78,7 @@ class App extends Component {
             </>
         );
     }
+   
     addFolder = folder => {
         this.setState({
           folders: [ ...this.state.folders, folder ],
@@ -87,7 +89,8 @@ class App extends Component {
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
-            deleteNote: this.handleDeleteNote
+            deleteNote: this.handleDeleteNote,
+            addFolder: this.addFolder
         };
         return (
             <ApiContext.Provider value={value}>
