@@ -3,6 +3,7 @@ import './AddFolder.css'
 import config from './config'
 import ApiContext from './ApiContext'
 import ErrorBoundary from './ErrorBoundary'
+import PropTypes from 'prop-types'
 
 const Required = () => (
   <span className='AddFolder__required'>*</span>
@@ -89,6 +90,13 @@ class AddFolder extends Component {
       </ErrorBoundary>
     )
   }
+}
+
+AddFolder.propTypes = {
+  name: PropTypes.string,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  folder: PropTypes.object
 }
 
 export default AddFolder

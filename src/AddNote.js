@@ -3,6 +3,7 @@ import './AddNote.css'
 import config from './config'
 import ApiContext from './ApiContext'
 import ErrorBoundary from './ErrorBoundary'
+import PropTypes from 'prop-types'
 
 const Required = () => (
   <span className='AddNote__required'>*</span>
@@ -110,6 +111,13 @@ class AddNote extends Component {
       </ErrorBoundary>
     )
   }
+}
+
+AddNote.propTypes = {
+  name: PropTypes.string,
+  id: PropTypes.string,
+  content: PropTypes.string,
+  folderId: PropTypes.object
 }
 
 export default AddNote
