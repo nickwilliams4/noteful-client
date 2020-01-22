@@ -2,6 +2,7 @@ import React, { Component } from  'react'
 import './AddFolder.css'
 import config from './config'
 import ApiContext from './ApiContext'
+import ErrorBoundary from './ErrorBoundary'
 
 const Required = () => (
   <span className='AddFolder__required'>*</span>
@@ -35,7 +36,7 @@ class AddFolder extends Component {
         return res.json()
       })
       .then(data => {
-        title.value = ''
+        data.name = title.value
         this.context.addFolder(data)
         this.props.history.push('/')
       })
@@ -49,6 +50,7 @@ class AddFolder extends Component {
   render() {
     const { error } = this.state
     return (
+      <ErrorBoundary>
       <section className='AddFolder'>
         <h2>Create a folder</h2>
         <form
@@ -84,6 +86,7 @@ class AddFolder extends Component {
           </div>
         </form>
       </section>
+      </ErrorBoundary>
     )
   }
 }

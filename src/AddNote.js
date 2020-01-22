@@ -2,6 +2,7 @@ import React, { Component } from  'react'
 import './AddNote.css'
 import config from './config'
 import ApiContext from './ApiContext'
+import ErrorBoundary from './ErrorBoundary'
 
 const Required = () => (
   <span className='AddNote__required'>*</span>
@@ -16,10 +17,11 @@ class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { title, note } = e.target
+    const { title, note, folderID } = e.target
     const notes = {
       title: title.value,
-      note: note.value
+      note: note.value,
+      folderID: folderID.value
     }
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/notes`, {
@@ -36,8 +38,10 @@ class AddNote extends Component {
         return res.json()
       })
       .then(data => {
-        title.value = ''
-        note.value = ''
+        data.name = title.value
+        data.content = note.value
+        data.folderId = folderID.value
+        data.modified = Date.now()
         this.context.addNote(data)
         this.props.history.push('/')
       })
@@ -51,6 +55,7 @@ class AddNote extends Component {
   render() {
     const { error } = this.state
     return (
+      <ErrorBoundary>
       <section className='AddNote'>
         <h2>Create a note</h2>
         <form
@@ -85,6 +90,11 @@ class AddNote extends Component {
               id='note'
             />
           </div>
+          <div>
+            <select name='folderID'>
+              {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.name}</option>)}
+            </select>
+          </div>
           
           <div className='AddNote__buttons'>
             <button type='button' onClick={this.handleClickCancel}>
@@ -97,6 +107,7 @@ class AddNote extends Component {
           </div>
         </form>
       </section>
+      </ErrorBoundary>
     )
   }
 }
