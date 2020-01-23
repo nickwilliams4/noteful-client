@@ -5,6 +5,7 @@ import ApiContext from '../ApiContext'
 import { findNote, findFolder } from '../notes-helpers'
 import './NotePageMain.css'
 import PropTypes from 'prop-types'
+import Note from '../Note/Note'
 
 export default class NotePageNav extends React.Component {
   static defaultProps = {
@@ -18,22 +19,13 @@ export default class NotePageNav extends React.Component {
   static contextType = ApiContext;
 
   render() {
-    const { notes, folders, } = this.context
+    const { notes, folders } = this.context
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || {}
     const folder = findFolder(folders, note.folderId)
     return (
       <div className='NotePageNav'>
-        <CircleButton
-          tag='button'
-          role='link'
-          onClick={() => this.props.history.goBack()}
-          className='NotePageNav__back-button'
-        >
-          <FontAwesomeIcon icon='chevron-left' />
-          <br />
-          Back
-        </CircleButton>
+      Note goes here
         {folder && (
           <h3 className='NotePageNav__folder-name'>
             {folder.name}

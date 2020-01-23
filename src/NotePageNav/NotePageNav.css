@@ -5,6 +5,9 @@
 .NotePageNav__back-button:hover {
   background-color: #FFB72F;
 }
+.NotePageNav {
+  color: white
+}
 
 .NotePageNav__folder-name {
   color: #b5b3b3;
