@@ -65,6 +65,8 @@ export default class Note extends React.Component {
             </span>
           </div>
         </div>
+        <div className='Note__Content'>
+        </div>
       </div>
     )
   }

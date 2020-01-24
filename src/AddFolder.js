@@ -20,7 +20,7 @@ class AddFolder extends Component {
     e.preventDefault()
     const { title } = e.target
     const folder = {
-      title: title.value
+      name: title.value
     }
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/folders`, {
