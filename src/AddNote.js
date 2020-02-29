@@ -21,13 +21,14 @@ class AddNote extends Component {
     const { title, note, folderID } = e.target
     const notes = {
       title: title.value,
-      note: note.value,
-      folderID: folderID.value
+      content: note.value,
+      folder_id: folderID.value
     }
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       body: JSON.stringify(notes),
+      headers: {'Content-Type': 'application/json'}
       
     })
       .then(res => {
@@ -39,9 +40,9 @@ class AddNote extends Component {
         return res.json()
       })
       .then(data => {
-        data.name = title.value
+        data.title = title.value
         data.content = note.value
-        data.folderId = folderID.value
+        data.folder_id = folderID.value
         data.modified = Date.now()
         this.context.addNote(data)
         this.props.history.push('/')
