@@ -18,11 +18,11 @@ class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { title, note, folderID } = e.target
+    const { title, content, folder_id } = e.target
     const notes = {
       title: title.value,
-      content: note.value,
-      folder_id: folderID.value
+      content: content.value,
+      folder_id: folder_id.value
     }
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/notes`, {
