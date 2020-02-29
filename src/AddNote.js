@@ -25,7 +25,7 @@ class AddNote extends Component {
       folder_id: folderID.value
     }
     this.setState({ error: null })
-    fetch(`${config.API_ENDPOINT}/add-note`, {
+    fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       body: JSON.stringify(notes),
       headers: {'Content-Type': 'application/json'}
