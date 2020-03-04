@@ -38,7 +38,7 @@ class AddFolder extends Component {
         return res.json()
       })
       .then(data => {
-        data.name = title.value
+        data.title = title.value
         this.context.addFolder(data)
         this.props.history.push('/')
       })
@@ -70,7 +70,7 @@ class AddFolder extends Component {
             </label>
             <input
               type='text'
-              name='title'
+              title='title'
               id='title'
               placeholder='Enter folder name'
               required
@@ -94,9 +94,8 @@ class AddFolder extends Component {
 }
 
 AddFolder.propTypes = {
-  name: PropTypes.string,
-  id: PropTypes.string,
   title: PropTypes.string,
+  id: PropTypes.string,
   folder: PropTypes.object
 }
 

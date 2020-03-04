@@ -18,11 +18,11 @@ class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { title, note, folderID } = e.target
+    const { title, content, id, folder_id } = e.target
     const notes = {
       title: title.value,
-      content: note.value,
-      folder_id: folderID.value
+      content: content.value,
+      id: id.value
     }
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/notes`, {
@@ -41,8 +41,9 @@ class AddNote extends Component {
       })
       .then(data => {
         data.title = title.value
-        data.content = note.value
-        data.folder_id = folderID.value
+        data.content = content.value
+        data.id = id.value
+        data.folder_id = folder_id.value
         data.modified = Date.now()
         this.context.addNote(data)
         this.props.history.push('/')
@@ -75,26 +76,26 @@ class AddNote extends Component {
             </label>
             <input
               type='text'
-              name='title'
+              title='title'
               id='title'
               placeholder='Enter note name'
               required
             />
           </div>
           <div>
-            <label htmlFor='note'>
+            <label htmlFor='content'>
               Note:
               {' '}
               <Required />
             </label>
             <textarea
-              name='note'
-              id='note'
+              title='content'
+              id='content'
             />
           </div>
           <div>
-            <select name='folderID'>
-              {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.name}</option>)}
+            <select title='title'>
+              {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.title}</option>)}
             </select>
           </div>
           
@@ -115,10 +116,10 @@ class AddNote extends Component {
 }
 
 AddNote.propTypes = {
-  name: PropTypes.string,
+  title: PropTypes.string,
   id: PropTypes.string,
   content: PropTypes.string,
-  folderId: PropTypes.object
+  folder_id: PropTypes.object
 }
 
 export default AddNote
