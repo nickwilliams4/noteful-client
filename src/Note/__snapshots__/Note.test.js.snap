@@ -50,7 +50,7 @@ exports[`Note component renders a .Note by default 1`] = `
       <span
         className="Date"
       >
-        Invalid Date
+        6th Mar 2020
       </span>
     </div>
   </div>
@@ -70,9 +70,7 @@ exports[`Note component renders the Note given props 1`] = `
     <Link
       replace={false}
       to="/note/a"
-    >
-      test-class-name
-    </Link>
+    />
   </h2>
   <button
     className="Note__delete"

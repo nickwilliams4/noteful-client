@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { format } from 'date-fns'
+import { format, parse } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './Note.css'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 export default class Note extends React.Component {
   static defaultProps ={
@@ -25,8 +26,7 @@ export default class Note extends React.Component {
     })
       .then(res => {
         if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
+          return Promise.reject('Could not delete')
       })
       .then(() => {
         this.context.deleteNote(note_id)
@@ -61,7 +61,7 @@ export default class Note extends React.Component {
             Modified
             {' '}
             <span className='Date'>
-              {format(modified, 'Do MMM YYYY')}
+              {moment(modified).format('Do MMM YYYY')}
             </span>
           </div>
         </div>

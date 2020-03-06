@@ -18,11 +18,11 @@ class AddNote extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { title, content, id, folder_id } = e.target
+    const { title, content, folder } = e.target
     const notes = {
       title: title.value,
       content: content.value,
-      id: id.value
+      folder_id: folder.value
     }
     this.setState({ error: null })
     fetch(`${config.API_ENDPOINT}/notes`, {
@@ -40,11 +40,6 @@ class AddNote extends Component {
         return res.json()
       })
       .then(data => {
-        data.title = title.value
-        data.content = content.value
-        data.id = id.value
-        data.folder_id = folder_id.value
-        data.modified = Date.now()
         this.context.addNote(data)
         this.props.history.push('/')
       })
@@ -94,7 +89,7 @@ class AddNote extends Component {
             />
           </div>
           <div>
-            <select title='title'>
+            <select title='title' id='folder'>
               {this.context.folders.map(folder => <option value={folder.id} key={folder.id}>{folder.title}</option>)}
             </select>
           </div>

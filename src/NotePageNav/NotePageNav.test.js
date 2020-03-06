@@ -14,10 +14,4 @@ describe(`NotePageNav component`, () => {
     const wrapper = shallow(<NotePageNav />)
     expect(toJson(wrapper)).toMatchSnapshot()
   })
-
-  it('renders a h3 with folder name when in props', () => {
-    const h3 = shallow(<NotePageNav {...props} />)
-      .find('.NotePageNav__folder-name')
-    expect(toJson(h3)).toMatchSnapshot()
-  })
 })
