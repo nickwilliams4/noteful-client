@@ -10,3 +10,20 @@
   color: #3a3939;
   max-width: 380px;
 }
+
+.Note_title {
+  font-size: 35px;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.Note_content {
+  font-size: 23px;
+  margin-bottom: 50px;
+}
+
+.NoteDatesModified {
+  font-size: 12px;
+}
+
+
